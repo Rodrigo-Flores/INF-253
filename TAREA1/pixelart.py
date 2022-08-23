@@ -7,13 +7,10 @@ import numpy as np
 with open("test-regex.txt", "r") as file:
     t = file.read()
     comandos = re.split(r"\n", t)
-
+    comandos_limpios = []
     for i in comandos:
-        print(re.findall(r"[A-Z][a-z]+", re.sub(r"\s", "", i)))
+        comandos_limpios.append([x for x in re.split(r"(\W)", i) if x not in ["", " "]])
+        # print([x for x in re.split(r"(\W)", i) if x not in ["", " "]])
 
-    # comandos_individuales_sin_espacios = []
-    # for comando in comandos_individuales:
-    #     comandos_individuales_sin_espacios.append(re.split(r"(\s[A-Z])", comando[0]))
-
-    # for i in comandos_individuales_sin_espacios:
-    #     print(i)
+for i in comandos_limpios:
+    print(i)
