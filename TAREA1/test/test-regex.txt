@@ -1,0 +1,20 @@
+Ancho 1
+Color de fondo Rojo
+
+Pintar Negro Avanzar
+Repetir 2 veces { Pintar Negro Izquierda Avanzar }
+Pintar Negro
+Derecha Avanzar 3
+Pintar Negro Avanzar
+Repetir 2 veces { Pintar Negro Derecha Avanzar }
+Pintar Negro
+Izquierda Avanzar
+Repetir 3 veces { Avanzar Pintar Negro }
+Derecha Avanzar 3 Derecha
+Repetir 3 veces { Pintar Negro Avanzar }
+Derecha Avanzar
+Repetir 3 veces {
+  Pintar Negro Avanzar
+  Pintar Negro Derecha Avanzar
+  Derecha Avanzar Derecha Derecha
+}

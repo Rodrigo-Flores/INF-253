@@ -1,0 +1,8 @@
+Ancho 10
+Color de fondo Rojo
+
+Pintar Negro Avanzar
+Pintar Negro
+Derecha Avanzar 3
+Pintar Negro Avanzar
+Pintar Negro
