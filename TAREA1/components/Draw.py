@@ -10,7 +10,6 @@ class Draw:
         }
         self.orientacion_actual = 1
         # [izquierda, arriba, derecha, abajo]
-        self.coordenadas_orientacion = [-1, -1, 1, 1]
         self.coordenadas_orientacion = {
             1: -1,
             2: 1,
@@ -30,8 +29,7 @@ class Draw:
         for i in range(ancho):
             self.data.append([fondo for j in range(ancho)])
         self.data = np.array(self.data, dtype=np.uint8)
-        self.width = len(self.data[0])
-        self.height = len(self.data)
+        self.size = len(self.data)
 
     def pintar(self, color=(0, 0, 0)) -> None:
         '''
@@ -63,18 +61,15 @@ class Draw:
             Parametros:
                     distancia (int): Distancia a avanzar.
         '''
-        if self.orientacion_actual == 0:
-            self.posicion["y"] -= (distancia *
-                                   self.coordenadas_orientacion[self.orientacion_actual])
-        elif self.orientacion_actual == 1:
-            self.posicion["x"] -= (distancia *
-                                   self.coordenadas_orientacion[self.orientacion_actual])
-        elif self.orientacion_actual == 2:
-            self.posicion["y"] += (distancia *
-                                   self.coordenadas_orientacion[self.orientacion_actual])
-        elif self.orientacion_actual == 3:
-            self.posicion["x"] += (distancia *
-                                   self.coordenadas_orientacion[self.orientacion_actual])
+        if self.orientacion_actual == 0 or self.orientacion_actual == 2:
+            self.posicion["y"] += (distancia * self.coordenadas_orientacion[self.orientacion_actual])
+            if self.posicion["y"] > self.size - 1 or self.posicion["y"] < 0:
+                assert False, "Cursor fuera de limite."
+
+        elif self.orientacion_actual == 1 or self.orientacion_actual == 3:
+            self.posicion["x"] += (distancia * self.coordenadas_orientacion[self.orientacion_actual])
+            if self.posicion["x"] > self.size - 1 or self.posicion["x"] < 0:
+                assert False, "Cursor fuera de limite."
 
     def exportar_imagen(self, filename='assets/pixelart.png', factor=100) -> str:
         '''
@@ -87,10 +82,11 @@ class Draw:
         '''
         np.swapaxes(self.data, 0, -1)
         img = Image.fromarray(self.data, 'RGB')
-        img = img.resize((self.height * factor, self.width * factor),
+        img = img.resize((self.size * factor, self.size * factor),
                          Image.Resampling.BOX)
         img.save(filename)
         return "Imagen guardada en: " + filename
+
 
 if __name__ == "__main__":
     draw = Draw(3, "Verde")
