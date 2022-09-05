@@ -17,5 +17,5 @@ Derecha Avanzar
 Repetir 3 veces {
   Pintar Negro Avanzar
   Pintar Negro Derecha Avanzar
-  Derecha Avanzar Derecha Derechas
+  Derecha Avanzar Derecha Derecha
 }

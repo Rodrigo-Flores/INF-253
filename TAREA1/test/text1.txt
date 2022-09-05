@@ -1,5 +1,5 @@
 Ancho 10
-Color de fondo Rojo
+Color de fondo Blanco
 
 Pintar Negro Avanzar
 Pintar Negro

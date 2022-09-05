@@ -15,9 +15,9 @@ expresiones = {
 
 with open("test/test-regex.txt", "r") as file:
     comandos = file.read()
-    # comandos = re.split(expresiones['separar_comandos'], t)
-    comandos = comandos.replace('\n', ' ').replace('  ', ' ').replace('  ', ' ')
-    print(comandos)
+    comandos = re.split(expresiones['separar_comandos'], comandos)
+    # comandos = comandos.replace('\n', ' ').replace('  ', ' ').replace('  ', ' ')
+    # print(comandos)
     comandos_limpios = []
     for i in comandos:
         comandos_limpios.append([x for x in re.split(expresiones['limpiar_comandos'], i) if x not in ["", " "]])
@@ -25,26 +25,28 @@ with open("test/test-regex.txt", "r") as file:
 cabeza_comandos_limpios = comandos_limpios[0:2]
 cuerpo_comandos_limpios = comandos_limpios[3:]
 
-# print(cabeza_comandos_limpios)
-# print(cuerpo_comandos_limpios)
+print(cabeza_comandos_limpios)
+print(cuerpo_comandos_limpios)
 
 # for i in cuerpo_comandos_limpios:
 #     print(i)
 
 
-# dibujo = Draw(ancho=int(cabeza_comandos_limpios[0][1]), fondo=cabeza_comandos_limpios[1][3])
+dibujo = Draw(ancho=int(cabeza_comandos_limpios[0][1]), fondo=cabeza_comandos_limpios[1][3])
 
-# for linea_comando in cuerpo_comandos_limpios:
-#     for i in range(len(linea_comando)):
-#         if linea_comando[i] == 'Pintar' and re.match(expresiones['colores'], linea_comando[i + 1]):
-#             dibujo.pintar(color=linea_comando[i + 1])
-#         elif linea_comando[i] == 'Avanzar' and (i + 1) == len(linea_comando):
-#             dibujo.avanzar()
-#         elif linea_comando[i] == 'Avanzar' and re.match(expresiones['numero'], linea_comando[i + 1]):
-#             dibujo.avanzar(distancia=int(linea_comando[i + 1]))
-#         elif linea_comando[i] == 'Izquierda':
-#             dibujo.izquierda()
-#         elif linea_comando[i] == 'Derecha':
-#             dibujo.derecha()
+for linea_comando in cuerpo_comandos_limpios:
+    for i in range(len(linea_comando)):
+        if linea_comando[i] == 'Pintar' and re.match(expresiones['colores'], linea_comando[i + 1]):
+            dibujo.pintar(color=linea_comando[i + 1])
+        elif linea_comando[i] == 'Avanzar' and (i + 1) == len(linea_comando):
+            dibujo.avanzar()
+        elif linea_comando[i] == 'Avanzar' and re.match(expresiones['numero'], linea_comando[i + 1]):
+            dibujo.avanzar(distancia=int(linea_comando[i + 1]))
+        elif linea_comando[i] == 'Izquierda':
+            dibujo.izquierda()
+        elif linea_comando[i] == 'Derecha':
+            dibujo.derecha()
+        else:
+            print("Error en el comando: " + str(linea_comando))
 
 dibujo.exportar_imagen(factor=250)
