@@ -1,15 +1,20 @@
 import numpy as np
 from PIL import Image
 
-
 class Draw:
     def __init__(self, ancho, fondo=(0, 0, 0)) -> None:
+        '''
+        Inicializa el cursor en la posicion (0, 0) y la orientacion hacia la derecha.
+            Parametros:
+                    ancho (int): Ancho de la imagen.
+                    fondo (tupla de enteros): Color de fondo de la imagen.
+        '''
         self.posicion = {
-            "x": 0,
-            "y": 0
+            "row": 0,
+            "col": 0
         }
-        self.orientacion_actual = 1
-        # [izquierda, arriba, derecha, abajo]
+        self.orientacion_actual = 2
+        # [izquierda, derecha, abajo, arriba]
         self.coordenadas_orientacion = {
             1: -1,
             2: 1,
@@ -41,7 +46,7 @@ class Draw:
         '''
         if type(color) is str:
             color = self.colores[color]
-        self.data[self.posicion["x"]][self.posicion["y"]] = color
+        self.data[self.posicion["row"]][self.posicion["col"]] = color
 
     def derecha(self) -> None:
         '''
@@ -61,15 +66,18 @@ class Draw:
             Parametros:
                     distancia (int): Distancia a avanzar.
         '''
-        if self.orientacion_actual == 0 or self.orientacion_actual == 2:
-            self.posicion["y"] += (distancia * self.coordenadas_orientacion[self.orientacion_actual])
-            if self.posicion["y"] > self.size - 1 or self.posicion["y"] < 0:
-                assert False, "Cursor fuera de limite."
+        if self.orientacion_actual == 1 or self.orientacion_actual == 2:
+            if self.posicion["col"] > self.size - 1 or self.posicion["col"] < 0:
+                assert "Cursor fuera de limite."
+            else:
+                self.posicion["col"] += (distancia * self.coordenadas_orientacion[self.orientacion_actual])
 
-        elif self.orientacion_actual == 1 or self.orientacion_actual == 3:
-            self.posicion["x"] += (distancia * self.coordenadas_orientacion[self.orientacion_actual])
-            if self.posicion["x"] > self.size - 1 or self.posicion["x"] < 0:
-                assert False, "Cursor fuera de limite."
+        elif self.orientacion_actual == 0 or self.orientacion_actual == 3:
+            if self.posicion["row"] > self.size - 1 or self.posicion["row"] < 0:
+                assert "Cursor fuera de limite."
+            else:
+                self.posicion["row"] += (distancia * self.coordenadas_orientacion[self.orientacion_actual])
+
 
     def exportar_imagen(self, filename='assets/pixelart.png', factor=100) -> str:
         '''
