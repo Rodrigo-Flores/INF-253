@@ -1,9 +1,12 @@
 from curses.ascii import isupper
 import re
-
 from Draw import Draw
 
-with open('text1.txt', 'r') as file:
+
+def detect_error(text):
+    print(text)
+
+with open('text3.txt', 'r') as file:
     text = file.read()
 
 # (Rojo|Verde|Azul|Negro|Blanco|RGB\(\d{1,3},\d{1,3},\d{1,3}\)))
@@ -22,12 +25,14 @@ expresiones = {
 }
 
 regex = re.compile(expresiones['movimientos'])
-text = text.replace('\n', ' ').replace('  ', ' ').replace('  ', ' ')
+separated_by_lines = re.split(r'\n', text)
+detect_error(separated_by_lines[3:])
+text = text.replace('\n', ' ').replace('  ', ' ').replace('  ', ' ').replace('  ', ' ')
 # print(regex.findall(text))
 # print(text)
 
 texto_separado = re.split(r'\s', text)
-print(texto_separado)
+# print(texto_separado)
 
 dibujo = Draw(ancho=int(texto_separado[1]), fondo=texto_separado[5])
 
@@ -45,6 +50,29 @@ while i < len(texto_separado):
             dibujo.avanzar()
     elif texto_separado[i] == 'Pintar':
         dibujo.pintar(color=texto_separado[i + 1])
+    elif texto_separado[i] == 'Repetir':
+        i += 1
+        t = i
+        for j in range(int(texto_separado[i])):
+            flag = True
+            while flag:
+                if texto_separado[i] == 'Izquierda':
+                    dibujo.izquierda()
+                elif texto_separado[i] == 'Derecha':
+                    dibujo.derecha()
+                elif texto_separado[i] == 'Avanzar':
+                    if texto_separado[i] == 'Avanzar' and texto_separado[i + 1].isdigit():
+                        dibujo.avanzar(distancia=int(texto_separado[i + 1]))
+                    else:
+                        dibujo.avanzar()
+                elif texto_separado[i] == 'Pintar':
+                    dibujo.pintar(color=texto_separado[i + 1])
+                elif texto_separado[i] == '}':
+                    break
+                i += 1
+                if i == len(texto_separado):
+                    i = t
+                    break
     i += 1
 
 dibujo.exportar_imagen(filename="../assets/pixelart.png", factor=250)
