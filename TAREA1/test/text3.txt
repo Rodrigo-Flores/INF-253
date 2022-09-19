@@ -4,12 +4,4 @@ Color de fondo Blanco
 Avanzar Derecha Avanzar
 Repetir 4 veces {
     Pintar Negro Avanzar
-    Pintar Negro Avanzar
-    Pintar Negro Avanzar
-    Pintar Negro Avanzar
-    Pintar Negro Avanzar
-    Pintar Negro Avanzar
-    Pintar Negro Avanzar
-    Pintar Negro Avanzar
-    Derecha Derecha Avanzar Derecha
 }
