@@ -1,7 +1,11 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-typedef enum { false, true } bool;
+typedef enum
+{
+    false,
+    true
+} bool;
 
 typedef struct
 {
@@ -16,7 +20,8 @@ typedef struct
     char enunciado[128];
     int n_alternativas;
     char **alternativas;
-    int alternativa_correcta;
+    int n_correctas;
+    int *alternativa_correcta;
 } tEnunciadoAlternativaMultiple;
 
 typedef struct
@@ -57,7 +62,7 @@ tPregunta *crearPregunta(
     char *tipo,
     void *enunciado,
     bool revisar(void *, void *));
- 
+
 // asigna la pregunta a la posicion n_pregunta del certamen
 void asignarPregunta(
     tCertamen *certamen,

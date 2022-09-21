@@ -2,18 +2,21 @@
 #include <stdlib.h>
 #include <string.h>
 
-int funcionPrueba(int x, int y);
+typedef struct {
+    char name[64];
+    int *age;
+
+} tPersona;
+
 
 int main() {
-    // char *x = "hola";
-    char x[128] = "hola";
-    // char *y = "hola";
-
-    if (strcmp(x, "hola") == 0.0) {
-        printf("Son iguales");
-    } else {
-        printf("Son diferentes");
-    }
+    tPersona *persona = (tPersona *) malloc(sizeof(tPersona));
+    strcpy(persona->name, "Juan");
+    persona->age = (int *) malloc(sizeof(int));
+    *(persona->age) = 20;
+    printf("%s %d", persona->name, *(persona->age));
+    free(persona->age);
+    free(persona);
 
     return 0;
 }

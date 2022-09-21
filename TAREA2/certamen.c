@@ -19,8 +19,8 @@ tPregunta *crearPregunta(
     void *enunciado,
     bool revisar(void *, void *))
 {
-    tPregunta *pregunta;
-    pregunta->tipo = tipo;
+    tPregunta *pregunta = (tPregunta *)malloc(sizeof(tPregunta));
+    strcpy(pregunta->tipo, tipo);
     pregunta->enunciado = enunciado;
     pregunta->revisar = revisar;
 
@@ -31,10 +31,13 @@ tPregunta *crearPregunta(
 void asignarPregunta(
     tCertamen *certamen,
     int n_pregunta,
-    tPregunta *pregunta);
+    tPregunta *pregunta)
+{
+    certamen->preguntas[n_pregunta] = *pregunta;
+}
 
 // retorna la pregunta en el posicion n_pregunta del certamen
-tPregunta leetPregunta(tCertamen *certamen, int n_pregunta);
+tPregunta leerPregunta(tCertamen *certamen, int n_pregunta);
 
 // retorna el numero de respuestas correctas que tiene un certamen
 int nCorrectasCertamen(tCertamen certamen);
