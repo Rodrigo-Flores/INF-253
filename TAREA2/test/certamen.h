@@ -38,7 +38,7 @@ typedef struct
     char tipo[64];
     void *enunciado;
     void *respuesta;
-    bool (*revisar)(void *, void *);
+    // bool (*revisar)(void *);
 } tPregunta;
 
 typedef struct
@@ -56,8 +56,8 @@ tCertamen *crearCertamen(int n_preguntas);
 tPregunta *crearPregunta(
     tCertamen *certamen,
     char *tipo,
-    void *enunciado,
-    bool revisar(void *, void *));
+    void *enunciado
+    /*bool (*revisar)(void *)*/);
 
 // asigna la pregunta a la posicion n_pregunta del certamen
 void asignarPregunta(
@@ -66,7 +66,7 @@ void asignarPregunta(
     tPregunta *pregunta);
 
 // retorna la pregunta en el posicion n_pregunta del certamen
-tPregunta leetPregunta(tCertamen *certamen, int n_pregunta);
+tPregunta leerPregunta(tCertamen *certamen, int n_pregunta);
 
 // retorna el numero de respuestas correctas que tiene un certamen
 int nCorrectasCertamen(tCertamen certamen);

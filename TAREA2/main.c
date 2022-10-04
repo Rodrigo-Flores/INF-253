@@ -19,7 +19,7 @@ int main()
     while (fgets(linea, 128, archivo))
     {
         // printf("%s", linea);
-        // strtok(linea, "\n");
+        strtok(linea, "\n");
         if (strcmp(linea, "AlternativaSimple") == 0.0)
         {
             fgets(linea, 128, archivo);
