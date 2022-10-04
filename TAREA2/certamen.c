@@ -1,6 +1,7 @@
 #include "certamen.h"
 #include <stdio.h>
 #include <stdlib.h>
+#include <stdbool.h>
 
 // crea un nuevo certamen vacio
 tCertamen *crearCertamen(int n_preguntas)
@@ -17,7 +18,7 @@ tPregunta *crearPregunta(
     tCertamen *certamen,
     char *tipo,
     void *enunciado,
-    bool revisar(void *, void *))
+    bool (*revisar)(void*))
 {
     tPregunta *pregunta = (tPregunta *)malloc(sizeof(tPregunta));
     strcpy(pregunta->tipo, tipo);
@@ -36,8 +37,28 @@ void asignarPregunta(
     certamen->preguntas[n_pregunta] = *pregunta;
 }
 
-// retorna la pregunta en el posicion n_pregunta del certamen
-tPregunta leerPregunta(tCertamen *certamen, int n_pregunta);
+// retorna la pregunta en la posicion n_pregunta del certamen
+tPregunta leerPregunta(tCertamen *certamen, int n_pregunta)
+{
+    // check data type
+    if (sizeof(certamen->preguntas[n_pregunta].enunciado) == sizeof(tEnunciadoAlternativa))
+    {
+        printf("tEnunciadoAlternativa");
+    }
+    else if (sizeof(certamen->preguntas[n_pregunta].enunciado) == sizeof(tEnunciadoAlternativaMultiple))
+    {
+        printf("tEnunciadoAlternativaMultiple");
+    }
+    else if (sizeof(certamen->preguntas[n_pregunta].enunciado) == sizeof(tEnunciadoVerdaderoFalso))
+    {
+        printf("tEnunciadoVerdaderoFalso");
+    }
+    else if (sizeof(certamen->preguntas[n_pregunta].enunciado) == sizeof(tEnunciadoCompletar))
+    {
+        printf("tEnunciadoCompletar");
+    }
+    return certamen->preguntas[n_pregunta];
+}
 
 // retorna el numero de respuestas correctas que tiene un certamen
 int nCorrectasCertamen(tCertamen certamen);
@@ -53,3 +74,7 @@ bool revisarAlternativaSimple(tPregunta pregunta);
 bool revisarAlternativaMultiple(tPregunta pregunta);
 bool revisarVerdaderoFalso(tPregunta pregunta);
 bool revisarCompletar(tPregunta pregunta);
+
+void numero(int n) {
+    printf("%d", n);
+}

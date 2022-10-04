@@ -1,7 +1,9 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include "certamen.h"
+#include <stdbool.h>
+// #include "certamen.h"
+#include "certamen.c"
 
 int main()
 {
@@ -38,7 +40,7 @@ int main()
             fgets(linea, 128, archivo);
             strtok(linea, "\n");
             enunciado->alternativa_correcta = atoi(linea);
-            tPregunta *pregunta = crearPregunta(certamen, "AlternativaSimple", enunciado, revisarAlternativaSimple);
+            tPregunta *pregunta = crearPregunta(certamen, (char*)("AlternativaSimple"), enunciado, revisarAlternativaSimple);
             asignarPregunta(certamen, i, pregunta);
         }
         else if (linea == "AlternativaMultiple")
@@ -68,7 +70,7 @@ int main()
                 strtok(linea, "\n");
                 enunciado->alternativa_correcta[j] = atoi(linea);
             }
-            tPregunta *pregunta = crearPregunta(certamen, "AlternativaMultiple", enunciado, revisarAlternativaMultiple);
+            tPregunta *pregunta = crearPregunta(certamen, (char*)("AlternativaMultiple"), enunciado, revisarAlternativaMultiple);
             asignarPregunta(certamen, i, pregunta);
         }
         else if (linea == "VerdaderoFalso")
@@ -81,13 +83,13 @@ int main()
             strtok(linea, "\n");
             if (strcmp(linea, "V") == 0.0)
             {
-                enunciado->respuesta = true;
+                enunciado->respuesta = true; // 1
             }
             else
             {
-                enunciado->respuesta = false;
+                enunciado->respuesta = false; // 0
             }
-            tPregunta *pregunta = crearPregunta(certamen, "VerdaderoFalso", enunciado, revisarVerdaderoFalso);
+            tPregunta *pregunta = crearPregunta(certamen, (char*)("VerdaderoFalso"), enunciado, revisarVerdaderoFalso);
             asignarPregunta(certamen, i, pregunta);
         }
         else if (linea == "Completar")
@@ -104,17 +106,29 @@ int main()
                 enunciado->textos[j] = (char *)malloc(sizeof(char) * 128);
                 strcpy(enunciado->textos[j], linea);
             }
-            for (int j = 0; j < (enunciado->n_textos - 1); j++) {
+            for (int j = 0; j < (enunciado->n_textos - 1); j++)
+            {
                 fgets(linea, 128, archivo);
                 strtok(linea, "\n");
-                enunciado->respuestas = (char *)malloc(sizeof(char) * 128);
-                strcpy(enunciado->respuestas, linea);
+                enunciado->respuestas = (char **)malloc(sizeof(char) * 128);
+                strcpy((char*)(enunciado)->respuestas, linea);
             }
         }
         i++;
     }
-
     fclose(archivo);
-    
+
+    printf("[ ok ] Certamen creado correctamente\n");
+
+    printf("El certamen cuenta con %d preguntas\n", certamen->n_preguntas);
+    // for (int i = 0; i < certamen->n_preguntas; i++)
+    // {
+    //     leetPregunta(certamen, i);
+    // }
+
+    // free memory
+    free(certamen->preguntas);
+    free(certamen);
+
     return 0;
 }

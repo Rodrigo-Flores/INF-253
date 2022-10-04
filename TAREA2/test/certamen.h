@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 #include <stdbool.h>
 
 typedef struct
@@ -37,7 +38,7 @@ typedef struct
     char tipo[64];
     void *enunciado;
     void *respuesta;
-    bool (*revisar)(void*);
+    bool (*revisar)(void *, void *);
 } tPregunta;
 
 typedef struct
@@ -56,7 +57,7 @@ tPregunta *crearPregunta(
     tCertamen *certamen,
     char *tipo,
     void *enunciado,
-    bool (*revisar)(tPregunta));
+    bool revisar(void *, void *));
 
 // asigna la pregunta a la posicion n_pregunta del certamen
 void asignarPregunta(
@@ -64,7 +65,7 @@ void asignarPregunta(
     int n_pregunta,
     tPregunta *pregunta);
 
-// retorna la pregunta en la posicion n_pregunta del certamen
+// retorna la pregunta en el posicion n_pregunta del certamen
 tPregunta leetPregunta(tCertamen *certamen, int n_pregunta);
 
 // retorna el numero de respuestas correctas que tiene un certamen
@@ -78,5 +79,3 @@ bool revisarAlternativaSimple(tPregunta pregunta);
 bool revisarAlternativaMultiple(tPregunta pregunta);
 bool revisarVerdaderoFalso(tPregunta pregunta);
 bool revisarCompletar(tPregunta pregunta);
-
-void numero(int n);
