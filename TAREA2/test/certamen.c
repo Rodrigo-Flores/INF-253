@@ -1,7 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdbool.h>
-
 #include "certamen.h"
 
 // crea un nuevo certamen vacio
@@ -14,22 +13,22 @@ tCertamen *crearCertamen(int n_preguntas)
     return certamen;
 }
 
-// crea una pregunta con el enunciado y funcion de revision dados
+// [ ok ] crea una pregunta con el enunciado y funcion de revision dados
 tPregunta *crearPregunta(
     tCertamen *certamen,
     char *tipo,
-    void *enunciado
-    /*bool revisar(void *)*/)
+    void *enunciado,
+    bool revisar(void *))
 {
     tPregunta *pregunta = (tPregunta *)malloc(sizeof(tPregunta));
     strcpy(pregunta->tipo, tipo);
     pregunta->enunciado = enunciado;
-    // pregunta->revisar = revisar;
+    pregunta->revisar = revisar;
 
     return pregunta;
 }
 
-// asigna la pregunta a la posicion n_pregunta del certamen
+// [ ok ] asigna la pregunta a la posicion n_pregunta del certamen
 void asignarPregunta(
     tCertamen *certamen,
     int n_pregunta,
@@ -38,22 +37,31 @@ void asignarPregunta(
     certamen->preguntas[n_pregunta] = *pregunta;
 }
 
-// retorna la pregunta en el posicion n_pregunta del certamen
-tPregunta leerPregunta(tCertamen *certamen, int n_pregunta) {
+// [ ok ] retorna la pregunta en el posicion n_pregunta del certamen
+tPregunta leerPregunta(tCertamen *certamen, int n_pregunta)
+{
     return certamen->preguntas[n_pregunta];
 }
 
 // retorna el numero de respuestas correctas que tiene un certamen
 int nCorrectasCertamen(tCertamen certamen);
 
-// retorna el numero de preguntas de un certamen
+// [ ok ] retorna el numero de preguntas de un certamen
 int largoCertamen(tCertamen certamen)
 {
     return certamen.n_preguntas;
 }
 
 // revisa si la respuesta a la pregunta es correcta
-bool revisarAlternativaSimple(tPregunta pregunta);
-bool revisarAlternativaMultiple(tPregunta pregunta);
-bool revisarVerdaderoFalso(tPregunta pregunta);
-bool revisarCompletar(tPregunta pregunta);
+bool revisarAlternativaSimple(tPregunta pregunta) {
+    printf("si\n");
+}
+bool revisarAlternativaMultiple(tPregunta pregunta){ 
+    printf("si\n");
+}
+bool revisarVerdaderoFalso(tPregunta pregunta) {
+    printf("si\n");
+}
+bool revisarCompletar(tPregunta pregunta) {
+    printf("si\n");
+}

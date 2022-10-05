@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include <string.h>
 #include <stdbool.h>
+#include <string.h>
 
 typedef struct
 {
@@ -38,7 +38,7 @@ typedef struct
     char tipo[64];
     void *enunciado;
     void *respuesta;
-    // bool (*revisar)(void *);
+    bool (*revisar)(void *);
 } tPregunta;
 
 typedef struct
@@ -56,8 +56,8 @@ tCertamen *crearCertamen(int n_preguntas);
 tPregunta *crearPregunta(
     tCertamen *certamen,
     char *tipo,
-    void *enunciado
-    /*bool (*revisar)(void *)*/);
+    void *enunciado,
+    bool (*revisar)(void *));
 
 // asigna la pregunta a la posicion n_pregunta del certamen
 void asignarPregunta(
