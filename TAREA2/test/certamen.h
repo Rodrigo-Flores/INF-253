@@ -47,6 +47,11 @@ typedef struct
     tPregunta *preguntas;
 } tCertamen;
 
+typedef struct {
+    int correctas;
+    int incorrectas;
+} tRespuesta;
+
 // FUNCIONES
 
 // crea un nuevo certamen vacio
@@ -75,7 +80,7 @@ int nCorrectasCertamen(tCertamen certamen);
 int largoCertamen(tCertamen certamen);
 
 // revisa si la respuesta a la pregunta es correcta
-bool revisarAlternativaSimple(tPregunta pregunta);
-bool revisarAlternativaMultiple(tPregunta pregunta);
-bool revisarVerdaderoFalso(tPregunta pregunta);
-bool revisarCompletar(tPregunta pregunta);
+bool revisarAlternativaSimple(tPregunta pregunta, unsigned int respuesta);
+bool revisarAlternativaMultiple(tPregunta pregunta, unsigned int *respuestas);
+bool revisarVerdaderoFalso(tPregunta pregunta,  bool respuesta);
+bool revisarCompletar(tPregunta pregunta, char **respuestas);

@@ -41,3 +41,10 @@ tipado.
 lenguaje de programación
 B
 débilmente
+AlternativaSimple
+¿Cual es la respuesta correcta a esta preguntae?
+3
+Esta alternativa
+La tercera alternativa
+La segunda alternativa
+1

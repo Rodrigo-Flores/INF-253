@@ -8,7 +8,7 @@ tCertamen *crearCertamen(int n_preguntas)
 {
     tCertamen *certamen = malloc(sizeof(tCertamen));
     certamen->n_preguntas = n_preguntas;
-    certamen->preguntas = (tPregunta *)malloc(sizeof(tPregunta) * n_preguntas);
+    certamen->preguntas = (tPregunta *)malloc(sizeof(tPregunta) * (n_preguntas));
 
     return certamen;
 }
@@ -53,15 +53,22 @@ int largoCertamen(tCertamen certamen)
 }
 
 // revisa si la respuesta a la pregunta es correcta
-bool revisarAlternativaSimple(tPregunta pregunta) {
-    printf("si\n");
+bool revisarAlternativaSimple(tPregunta pregunta, unsigned int respuesta) {
+    return ((tEnunciadoAlternativa *)pregunta.enunciado)->alternativa_correcta == respuesta;
 }
-bool revisarAlternativaMultiple(tPregunta pregunta){ 
-    printf("si\n");
+bool revisarAlternativaMultiple(tPregunta pregunta, unsigned int *respuestas){ 
+    tEnunciadoAlternativaMultiple *enunciado = (tEnunciadoAlternativaMultiple *)pregunta.enunciado;
+    int n_correctas = 0;
+    for (int i = 0; i < enunciado->n_alternativas; i++) {
+        if (enunciado->alternativa_correcta[i] == respuestas[i]) {
+            n_correctas++;
+        }
+    }
+    return n_correctas == enunciado->n_correctas;
 }
-bool revisarVerdaderoFalso(tPregunta pregunta) {
-    printf("si\n");
+bool revisarVerdaderoFalso(tPregunta pregunta, bool respuesta) {
+    return ((tEnunciadoVerdaderoFalso *)pregunta.enunciado)->respuesta == respuesta;
 }
-bool revisarCompletar(tPregunta pregunta) {
+bool revisarCompletar(tPregunta pregunta, char **respuesta) {
     printf("si\n");
 }
