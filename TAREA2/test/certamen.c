@@ -70,5 +70,12 @@ bool revisarVerdaderoFalso(tPregunta pregunta, bool respuesta) {
     return ((tEnunciadoVerdaderoFalso *)pregunta.enunciado)->respuesta == respuesta;
 }
 bool revisarCompletar(tPregunta pregunta, char **respuesta) {
-    printf("si\n");
+    tEnunciadoCompletar *enunciado = (tEnunciadoCompletar *)pregunta.enunciado;
+    int n_correctas = 0;
+    for (int i = 0; i < enunciado->n_textos; i++) {
+        if (strcmp(enunciado->respuestas[i], respuesta[i]) == 0) {
+            n_correctas++;
+        }
+    }
+    return n_correctas == enunciado->n_textos;
 }

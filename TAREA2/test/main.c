@@ -131,9 +131,10 @@ int main()
         strtok(linea, "\n");
         if (strcmp(linea, "AlternativaSimple") == 0.0)
         {
+            printf("- - - - - - - - - %d - - - - - - - - -\n", k + 1);
             tPregunta pregunta = leerPregunta(certamen, k);
             tEnunciadoAlternativa *enunciado = (tEnunciadoAlternativa *)pregunta.enunciado;
-            printf("SIMPLE: %s\n", enunciado->enunciado);
+            printf("%s\n", enunciado->enunciado);
             for (int j = 0; j < enunciado->n_alternativas; j++)
             {
                 printf("%d. %s\n", j + 1, enunciado->alternativas[j]);
@@ -152,14 +153,15 @@ int main()
         }
         if (strcmp(linea, "AlternativaMultiple") == 0.0)
         {
+            printf("- - - - - - - - - %d - - - - - - - - -\n", k + 1);
             tPregunta pregunta = leerPregunta(certamen, k);
             tEnunciadoAlternativaMultiple *enunciado = (tEnunciadoAlternativaMultiple *)pregunta.enunciado;
-            printf("MULTIPLE: %s\n", enunciado->enunciado);
+            printf("%s\n", enunciado->enunciado);
             for (int j = 0; j < enunciado->n_alternativas; j++)
             {
                 printf("%d. %s\n", j + 1, enunciado->alternativas[j]);
             }
-            printf("¿Cuantas alternativas se escogeran?\n>");
+            printf("¿Cuantas alternativas se escogeras?\n>");
             scanf("%d", &respuesta);
             int *respuestas_usuario = (int *)malloc(sizeof(int) * respuesta);
             for (int j = 0; j < respuesta; j++)
@@ -180,9 +182,10 @@ int main()
         }
         if (strcmp(linea, "VerdaderoFalso") == 0.0)
         {
+            printf("- - - - - - - - - %d - - - - - - - - -\n", k + 1);
             tPregunta pregunta = leerPregunta(certamen, k);
             tEnunciadoVerdaderoFalso *enunciado = (tEnunciadoVerdaderoFalso *)pregunta.enunciado;
-            printf("BOOL: %s\n", enunciado->enunciado);
+            printf("%s\n", enunciado->enunciado);
             printf("1. Verdadero\n");
             printf("2. Falso\n>");
             scanf("%d", &respuesta);
@@ -213,13 +216,29 @@ int main()
         }
         if (strcmp(linea, "Completar") == 0.0)
         {
+            printf("- - - - - - - - - %d - - - - - - - - -\n", k + 1);
             tPregunta pregunta = leerPregunta(certamen, k);
             tEnunciadoCompletar *enunciado = (tEnunciadoCompletar *)pregunta.enunciado;
             printf("%d\n", k);
             for (int j = 0; j < enunciado->n_textos; j++)
             {
-                printf("COMPLETAR: %s\n", enunciado->textos[j]);
+                printf("%s\n", enunciado->textos[j]);
             }
+            printf("\n>");
+            // char **respuestas_usuario = (char **)malloc(sizeof(char *) * (enunciado->n_textos - 1));
+            // for (int j = 0; j < (enunciado->n_textos - 1); j++)
+            // {
+            //     respuestas_usuario[j] = (char *)malloc(sizeof(char) * 128);
+            //     scanf("%s", respuestas_usuario[j]);
+            // }
+            // if (revisarCompletar(pregunta, respuestas_usuario))
+            // {
+            //     respuestas->correctas++;
+            // }
+            // else
+            // {
+            //     respuestas->incorrectas++;
+            // }
             k++;
         }
     }
