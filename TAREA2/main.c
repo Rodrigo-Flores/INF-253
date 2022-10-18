@@ -1,9 +1,14 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include <string.h>
-#include <stdbool.h>
-// #include "certamen.h"
-#include "certamen.c"
+#include "certamen.h"
+
+/*
+Carga el programa principal
+
+    Retorno:
+        0: Si el programa termina correctamente
+        1: Si el programa termina con error
+*/
 
 int main()
 {
@@ -15,10 +20,11 @@ int main()
     fgets(linea, 128, archivo);
     n_preguntas = atoi(linea); // sscanf(linea, "%d", &n_preguntas);
     tCertamen *certamen = crearCertamen(n_preguntas);
+
+    // recoleccion de datos
     int i = 0;
     while (fgets(linea, 128, archivo))
     {
-        // printf("%s", linea);
         strtok(linea, "\n");
         if (strcmp(linea, "AlternativaSimple") == 0.0)
         {
@@ -40,10 +46,11 @@ int main()
             fgets(linea, 128, archivo);
             strtok(linea, "\n");
             enunciado->alternativa_correcta = atoi(linea);
-            tPregunta *pregunta = crearPregunta(certamen, (char*)("AlternativaSimple"), enunciado, revisarAlternativaSimple);
+            tPregunta *pregunta = crearPregunta(certamen, (char *)("AlternativaSimple"), enunciado, (void *)revisarAlternativaSimple);
             asignarPregunta(certamen, i, pregunta);
+            i++;
         }
-        else if (linea == "AlternativaMultiple")
+        if (strcmp(linea, "AlternativaMultiple") == 0.0)
         {
             fgets(linea, 128, archivo);
             strtok(linea, "\n");
@@ -70,10 +77,11 @@ int main()
                 strtok(linea, "\n");
                 enunciado->alternativa_correcta[j] = atoi(linea);
             }
-            tPregunta *pregunta = crearPregunta(certamen, (char*)("AlternativaMultiple"), enunciado, revisarAlternativaMultiple);
+            tPregunta *pregunta = crearPregunta(certamen, (char *)("AlternativaMultiple"), enunciado, (void *)revisarAlternativaMultiple);
             asignarPregunta(certamen, i, pregunta);
+            i++;
         }
-        else if (linea == "VerdaderoFalso")
+        if (strcmp(linea, "VerdaderoFalso") == 0.0)
         {
             fgets(linea, 128, archivo);
             strtok(linea, "\n");
@@ -89,17 +97,18 @@ int main()
             {
                 enunciado->respuesta = false; // 0
             }
-            tPregunta *pregunta = crearPregunta(certamen, (char*)("VerdaderoFalso"), enunciado, revisarVerdaderoFalso);
+            tPregunta *pregunta = crearPregunta(certamen, (char *)("VerdaderoFalso"), enunciado, (void *)revisarVerdaderoFalso);
             asignarPregunta(certamen, i, pregunta);
+            i++;
         }
-        else if (linea == "Completar")
+        if (strcmp(linea, "Completar") == 0.0)
         {
             fgets(linea, 128, archivo);
             strtok(linea, "\n");
             tEnunciadoCompletar *enunciado = (tEnunciadoCompletar *)malloc(sizeof(tEnunciadoCompletar));
             enunciado->n_textos = atoi(linea);
             enunciado->textos = (char **)malloc(sizeof(char *) * enunciado->n_textos);
-            for (int j = 0; j < (enunciado->n_textos - 1); j++)
+            for (int j = 0; j < (enunciado->n_textos); j++)
             {
                 fgets(linea, 128, archivo);
                 strtok(linea, "\n");
@@ -111,24 +120,145 @@ int main()
                 fgets(linea, 128, archivo);
                 strtok(linea, "\n");
                 enunciado->respuestas = (char **)malloc(sizeof(char) * 128);
-                strcpy((char*)(enunciado)->respuestas, linea);
+                strcpy((char *)(enunciado)->respuestas, linea);
             }
+            tPregunta *pregunta = crearPregunta(certamen, (char *)("Completar"), enunciado, (void *)revisarCompletar);
+            asignarPregunta(certamen, i, pregunta);
+            i++;
         }
-        i++;
     }
-    fclose(archivo);
+    // logica de respuesta de usuario
+    int respuesta, k = 0;
+    tRespuesta *respuestas = (tRespuesta *)malloc(sizeof(tRespuesta) * certamen->n_preguntas);
+    respuestas->correctas = 0;
+    respuestas->incorrectas = 0;
+    fseek(archivo, 0, SEEK_SET);
+    while (fgets(linea, 128, archivo))
+    {
+        respuesta = 0;
+        strtok(linea, "\n");
+        if (strcmp(linea, "AlternativaSimple") == 0.0)
+        {
+            printf("- - - - - - - - - %d - - - - - - - - -\n", k + 1);
+            tPregunta pregunta = leerPregunta(certamen, k);
+            tEnunciadoAlternativa *enunciado = (tEnunciadoAlternativa *)pregunta.enunciado;
+            printf("%s\n", enunciado->enunciado);
+            for (int j = 0; j < enunciado->n_alternativas; j++)
+            {
+                printf("%d. %s\n", j + 1, enunciado->alternativas[j]);
+            }
+            printf("\n>");
+            scanf("%d", &respuesta);
+            if (revisarAlternativaSimple(pregunta, respuesta))
+            {
+                respuestas->correctas++;
+            }
+            else
+            {
+                respuestas->incorrectas++;
+            }
+            k++;
+        }
+        if (strcmp(linea, "AlternativaMultiple") == 0.0)
+        {
+            printf("- - - - - - - - - %d - - - - - - - - -\n", k + 1);
+            tPregunta pregunta = leerPregunta(certamen, k);
+            tEnunciadoAlternativaMultiple *enunciado = (tEnunciadoAlternativaMultiple *)pregunta.enunciado;
+            printf("%s\n", enunciado->enunciado);
+            for (int j = 0; j < enunciado->n_alternativas; j++)
+            {
+                printf("%d. %s\n", j + 1, enunciado->alternativas[j]);
+            }
+            printf("¿Cuantas alternativas se escogeras?\n>");
+            scanf("%d", &respuesta);
+            int *respuestas_usuario = (int *)malloc(sizeof(int) * respuesta);
+            for (int j = 0; j < respuesta; j++)
+            {
+                printf(">");
+                scanf("%d", &respuestas_usuario[j]);
+            }
+            if (revisarAlternativaMultiple(pregunta, respuestas_usuario))
+            {
+                respuestas->correctas++;
+            }
+            else
+            {
+                respuestas->incorrectas++;
+            }
 
-    printf("[ ok ] Certamen creado correctamente\n");
+            k++;
+        }
+        if (strcmp(linea, "VerdaderoFalso") == 0.0)
+        {
+            printf("- - - - - - - - - %d - - - - - - - - -\n", k + 1);
+            tPregunta pregunta = leerPregunta(certamen, k);
+            tEnunciadoVerdaderoFalso *enunciado = (tEnunciadoVerdaderoFalso *)pregunta.enunciado;
+            printf("%s\n", enunciado->enunciado);
+            printf("1. Verdadero\n");
+            printf("2. Falso\n>");
+            scanf("%d", &respuesta);
+            if (respuesta == 1)
+            {
+                if (revisarVerdaderoFalso(pregunta, true))
+                {
+                    respuestas->correctas++;
+                }
+                else
+                {
+                    respuestas->incorrectas++;
+                }
+            }
+            else if (respuesta == 0)
+            {
+                if (revisarVerdaderoFalso(pregunta, false))
+                {
+                    respuestas->correctas++;
+                }
+                else
+                {
+                    respuestas->incorrectas++;
+                }
+            }
 
-    printf("El certamen cuenta con %d preguntas\n", certamen->n_preguntas);
-    // for (int i = 0; i < certamen->n_preguntas; i++)
-    // {
-    //     leetPregunta(certamen, i);
-    // }
+            k++;
+        }
+        if (strcmp(linea, "Completar") == 0.0)
+        {
+            printf("- - - - - - - - - %d - - - - - - - - -\n", k + 1);
+            tPregunta pregunta = leerPregunta(certamen, k);
+            tEnunciadoCompletar *enunciado = (tEnunciadoCompletar *)pregunta.enunciado;
+            printf("%d\n", k);
+            for (int j = 0; j < enunciado->n_textos; j++)
+            {
+                printf("%s\n", enunciado->textos[j]);
+            }
+            printf("\n>");
+            // char **respuestas_usuario = (char **)malloc(sizeof(char *) * (enunciado->n_textos - 1));
+            // for (int j = 0; j < (enunciado->n_textos - 1); j++)
+            // {
+            //     respuestas_usuario[j] = (char *)malloc(sizeof(char) * 128);
+            //     scanf("%s", respuestas_usuario[j]);
+            // }
+            // if (revisarCompletar(pregunta, respuestas_usuario))
+            // {
+            //     respuestas->correctas++;
+            // }
+            // else
+            // {
+            //     respuestas->incorrectas++;
+            // }
+            k++;
+        }
+    }
 
-    // free memory
+    printf("Correctas: %d\n", respuestas->correctas);
+    printf("Incorrectas: %d\n", respuestas->incorrectas);
+
     free(certamen->preguntas);
     free(certamen);
+    free(respuestas);
+
+    fclose(archivo);
 
     return 0;
 }
