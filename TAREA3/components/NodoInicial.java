@@ -1,9 +1,11 @@
 package components;
+import components.Nodo;
 
-public class NodoInicial {
+public class NodoInicial extends Nodo{
 	private int id;
 
 	public NodoInicial() {
 		this.id = 0;
 	}
+	public void interactuar() {}
 }

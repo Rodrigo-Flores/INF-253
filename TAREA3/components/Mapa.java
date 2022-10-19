@@ -8,13 +8,15 @@ import components.NodoJefeFinal;
 import components.Edge;
 import java.util.HashMap;
 import java.util.SortedSet;
+import java.util.List;
+import java.util.ArrayList;
+import java.lang.Math;
 
 public class Mapa {
 	private int profundidad;
 	private NodoInicial nodo_inicial = new NodoInicial();
 	private Nodo nodo_actual;
 	private HashMap<Integer, String> tipos_nodos = new HashMap<Integer, String>();
-	private int[] probabilidades = new int[] {1, 1, 1, 2, 3, 3, 3, 3, 3, 3};
 	private int n;
     private int[][] matriz;
     private NodoJefeFinal jefe = new NodoJefeFinal("JEFE FINAL");
@@ -24,24 +26,38 @@ public class Mapa {
         this.profundidad = profundidad;
         matriz = new int[this.n][this.n];
         //se inicializa matriz en 0
-        for(int i = 0; i < n; i++){
-            for(int j=0; j< n; j++){
+        for(int i = 0; i < this.n; i++){
+            for(int j=0; j< this.n; j++){
                 matriz[i][j] = 0;
             }            
         }
         SortedSet<Edge> edges = GraphGenerator.Generar(profundidad);
-        // get last elements from the sortedset
-        Edge[] edges_array = edges.toArray(new Edge[edges.size()]);
-        jefe.set_id(edges_array[edges_array.length-1].y);
-        
-        for (int i = 0; i < nodo_jefe_final; i++) {
-        	this.agregar(edges_array[i].x, edges_array[i].y);
+        for (Edge edge : edges) {
+        	if (edge.x == 0) {
+        		double seleccion = Math.random();
+        		if (seleccion < 0.3) {
+        			NodoEvento evento = new NodoEvento("EVENTO");
+        			evento.set_id(edge.y);
+        			nodo_inicial.agregarNodo(evento);
+        		} else if (seleccion < 0.4) {
+        			NodoTienda tienda = new NodoTienda();
+        			tienda.set_id(edge.y);
+        			nodo_inicial.agregarNodo(tienda);
+        		} else if (seleccion < 1) {
+        			NodoCombate combate = new NodoCombate("ENEMIGO");
+        			combate.set_id(edge.y);
+        			nodo_inicial.agregarNodo(combate);
+
+        		}
+        	}
         }
+
+
     }
     
     public void agregar(int i, int j){
     	for (int k = 1; k < this.n; k++) {
-    		matriz[i][j] = probabilidades[numero_aleatorio(0, 10)];
+    		matriz[i][j] += 1;
     	}
     }
     
@@ -52,9 +68,9 @@ public class Mapa {
     
 
     public void imprimir_siguientes(int n) {
-    	System.out.printf("%-7d | ", n);
+    	System.out.printf("%-2d | ", n);
     	for (int i = 0; i < this.n; i++) {
-    		System.out.printf("%-7d  ", matriz[n][i]);
+    		System.out.printf("%-2d  ", matriz[n][i]);
     	}
     }
 

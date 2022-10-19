@@ -9,6 +9,10 @@ public class NodoEvento extends Nodo {
 	private Item resultado1;
 	private Item resultado2;
 
+	public NodoEvento(String descripcion) {
+		this.descripcion = descripcion;
+	}
+
 	public void interactuar() {}
 
 }
