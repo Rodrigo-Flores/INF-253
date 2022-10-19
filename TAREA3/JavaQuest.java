@@ -1,18 +1,21 @@
 package components;
-import java.util.SortedSet;
+import java.util.*;
 
 public class JavaQuest {
     public static void main(String[] args) {
-        SortedSet<Edge> edges = GraphGenerator.Generar(15);
-        Jugador player = new Jugador("Rodrigo");
+        System.out.print("Profundidad del mapa\n> ");  
+        Scanner sc= new Scanner(System.in);
+        int profundidad = sc.nextInt();
+        SortedSet<Edge> edges = GraphGenerator.Generar(profundidad);
+        Mapa mapa = new Mapa(profundidad*profundidad);
 
-        player.verEstado();
+        for (Edge e : edges) {
+            // System.out.printf("\n(%d) -> (%d)", e.x, e.y);
+            mapa.agregar(e.x, e.y);
+        }
 
-        Item item1 = new Item(10, 1, 1, 1, 1);
+        mapa.verMapa();
 
-        player.asignarItem(item1);
-
-        player.verItems();
 
 
     }

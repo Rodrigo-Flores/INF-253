@@ -15,7 +15,7 @@ public class Jugador extends Personaje {
 		System.out.println(
             "Nombre: " + get_nombre()
             + "\nDinero: " + get_dinero()
-            + "\nHP Actual: " + get_hp_actual()
+            + "\nHP Actual: " + get_hp_actual() 
             + "\nHP Total: " + get_hp_total()
             + "\nDanio: " + get_danio()
             + "\nDefensa: " + get_defensa()
