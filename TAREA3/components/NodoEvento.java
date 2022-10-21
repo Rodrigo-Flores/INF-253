@@ -1,6 +1,7 @@
 package components;
 import components.Nodo;
 import components.Item;
+import java.util.Scanner;
 
 public class NodoEvento extends Nodo {
 	private String descripcion;
@@ -13,6 +14,14 @@ public class NodoEvento extends Nodo {
 		this.descripcion = descripcion;
 	}
 
-	public void interactuar() {}
+	public void interactuar(Jugador) {
+		int eleccion;
+		System.out.println(this.descripcion);
+		System.out.print("Puedes elegir entre dos opciones:");
+		System.out.print("(1) %s\n(2) %s", alternativa1, alternativa2);
+		Scanner input = new Scanner(System.in);
+		eleccion = input.nextInt();
+		if (eleccion == 1) {}
+	}
 
 }

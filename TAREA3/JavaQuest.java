@@ -8,5 +8,9 @@ public class JavaQuest {
         int profundidad = sc.nextInt();
         Mapa mapa = new Mapa(profundidad);
         mapa.verMapa();
+        mapa.avanzar();
+        mapa.avanzar();
+        mapa.avanzar();
+        mapa.avanzar();
     }
 }
