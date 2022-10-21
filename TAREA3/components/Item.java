@@ -2,13 +2,15 @@ package components;
 import components.Jugador;
 
 public class Item {
+	private String nombre;
 	private int precio;
 	private int recuperar_hp;
 	private int aumentar_hp_total;
 	private int aumentar_danio;
 	private int aumentar_defensa;
 
-	public Item (int precio, int recuperar_hp, int aumentar_hp_total, int aumentar_danio, int aumentar_defensa) {
+	public Item (String nombre, int precio, int recuperar_hp, int aumentar_hp_total, int aumentar_danio, int aumentar_defensa) {
+		this.nombre = nombre;
 		this.precio = precio;
 		this.recuperar_hp = recuperar_hp;
 		this.aumentar_hp_total = aumentar_hp_total;
@@ -27,9 +29,10 @@ public class Item {
 		}
 	}
 
-	public int get_precio() {return this.precio; }
-	public int get_recuperar_hp() {return this.recuperar_hp; }
-	public int get_aumentar_hp_total() {return this.aumentar_hp_total; }
-	public int get_aumentar_danio() {return this.aumentar_danio; }
-	public int get_aumentar_defensa() {return this.aumentar_defensa; }
+	public String get_nombre() { return this.nombre; }
+	public int get_precio() { return this.precio; }
+	public int get_recuperar_hp() { return this.recuperar_hp; }
+	public int get_aumentar_hp_total() { return this.aumentar_hp_total; }
+	public int get_aumentar_danio() { return this.aumentar_danio; }
+	public int get_aumentar_defensa() { return this.aumentar_defensa; }
 }
