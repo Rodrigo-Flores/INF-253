@@ -8,8 +8,6 @@ import components.NodoJefeFinal;
 import components.Edge;
 import java.util.HashMap;
 import java.util.SortedSet;
-import java.util.List;
-import java.util.ArrayList;
 import java.lang.Math;
 import java.util.Scanner;
 
