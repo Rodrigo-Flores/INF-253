@@ -14,9 +14,8 @@ public class NodoEvento extends Nodo {
 		this.descripcion = descripcion;
 	}
 
-	public void interactuar() { }
-
-	/*
+	public final void interactuar() {
+		// interactuar();
 		int eleccion;
 		System.out.println(this.descripcion);
 		System.out.print("Puedes elegir entre dos opciones:");
@@ -24,6 +23,5 @@ public class NodoEvento extends Nodo {
 		Scanner input = new Scanner(System.in);
 		eleccion = input.nextInt();
 		if (eleccion == 1) {}
-	*/
-
+	}
 }

@@ -14,7 +14,8 @@ public class NodoTienda extends Nodo {
 		this.nombre = nombre;
 	}
 
-	public void interactuar() {
+	public final void interactuar() {
+		// interactuar();
 		System.out.println("Items disponibles para comprar:");
 		for (int i = 0; i < this.items.size(); i++) {
 			System.out.printf("(%i) Nombre: %s -> Precio: %i\n", i, this.items.get(i).get_nombre(), this.items.get(i).get_precio());

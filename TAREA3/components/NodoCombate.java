@@ -8,5 +8,8 @@ public class NodoCombate extends Nodo {
 		Personaje enemigo = new Personaje(nombre);
 	}
 
-	public void interactuar() {}
+	public final void interactuar() {
+		// interactuar();
+		System.out.println("INTERACTUAR COMBATE");
+	}
 }

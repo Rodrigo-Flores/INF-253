@@ -45,16 +45,19 @@ public class Mapa {
 	    	double n = Math.random();
 	    	if (n < 0.3) {
 	    		nodo_actual = new NodoEvento("EVENTO");
+	    		System.out.println("ASIGNADO: EVENTO");
 	    	} else if (n < 0.4) {
 	    		nodo_actual = new NodoTienda("TIENDA");
+	    		System.out.println("ASIGNADO: TIENDA");
 	    	} else if (n < 1.0) {
 	    		nodo_actual = new NodoCombate("ENEMIGO");
+	    		System.out.println("ASIGNADO: ENEMIGO");
 	    	}
 	    	nodo_actual.set_id(camino);
+			nodo_actual.interactuar();
 		} else {
 			nodo_actual = new NodoJefeFinal("JEFE FINAL");
 			System.out.println("JEFE FINAL");
 		}
 	}
-
 }
