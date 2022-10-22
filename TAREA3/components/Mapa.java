@@ -6,6 +6,7 @@ import components.NodoTienda;
 import components.NodoCombate;
 import components.NodoJefeFinal;
 import components.Edge;
+import components.Jugador;
 import java.util.HashMap;
 import java.util.SortedSet;
 import java.lang.Math;
@@ -19,7 +20,7 @@ public class Mapa {
     private int nodo_jefe;
     private SortedSet<Edge> edges;
 
-    public Mapa(int profundidad ) {
+    public Mapa(int profundidad) {
         this.profundidad = profundidad;
         this.edges = GraphGenerator.Generar(profundidad);
         this.nodo_jefe = edges.last().y;
@@ -31,8 +32,8 @@ public class Mapa {
     	}
     }
 
-	public void avanzar() {
-	Scanner input = new Scanner(System.in);  // Create a Scanner object
+	public void avanzar(Jugador jugador) {
+		Scanner input = new Scanner(System.in);  // Create a Scanner object
 		System.out.println("\nCaminos diposnibles para avanzar:\n");
 		for (Edge edge : edges) {
 			if (edge.x == nodo_actual.get_id()) {
@@ -43,10 +44,10 @@ public class Mapa {
     	int camino = input.nextInt();
 		if (camino != this.nodo_jefe) {
 	    	double n = Math.random();
-	    	if (n < 0.3) {
+	    	if (n < 0.5) {
 	    		nodo_actual = new NodoEvento("EVENTO");
 	    		System.out.println("ASIGNADO: EVENTO");
-	    	} else if (n < 0.4) {
+	    	} else if (n < 0.9) {
 	    		nodo_actual = new NodoTienda("TIENDA");
 	    		System.out.println("ASIGNADO: TIENDA");
 	    	} else if (n < 1.0) {
@@ -54,10 +55,12 @@ public class Mapa {
 	    		System.out.println("ASIGNADO: ENEMIGO");
 	    	}
 	    	nodo_actual.set_id(camino);
-			nodo_actual.interactuar();
 		} else {
 			nodo_actual = new NodoJefeFinal("JEFE FINAL");
+			nodo_actual.set_id(this.nodo_jefe);
 			System.out.println("JEFE FINAL");
 		}
+		nodo_actual.interactuar(jugador);
+		// input.close();
 	}
 }

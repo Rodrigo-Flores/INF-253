@@ -7,5 +7,5 @@ public class NodoInicial extends Nodo{
 	public NodoInicial() {
 		this.id = 0;
 	}
-	public final void interactuar() {}
+	public final void interactuar(Jugador jugador) {}
 }

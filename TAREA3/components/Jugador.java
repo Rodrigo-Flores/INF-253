@@ -20,13 +20,12 @@ public class Jugador extends Personaje {
             + "\nDanio: " + get_danio()
             + "\nDefensa: " + get_defensa()
         );
-        items.add(new Item("POCION DE VIDA", 100, 7, 0, 0, 0));
 	}
 
 	public void verItems() {
 		System.out.printf("%-18s | %-10s | %-14s | %-18s | %-18s | %-18s %n", "Nombre", "Precio", "Recuperar HP", "Aumentar HP total", "Aumentar danio", "Aumentar defensa");
 		for (Item item : items) {
-			System.out.printf("%-10d | %-14d | %-18d | %-18d | %-18d %n",
+			System.out.printf("%-18s | %-10d | %-14d | %-18d | %-18d | %-18d %n",
 				item.get_nombre(), item.get_precio(), item.get_recuperar_hp(), item.get_aumentar_hp_total(), item.get_aumentar_danio(), item.get_aumentar_defensa());
 		}
 	}

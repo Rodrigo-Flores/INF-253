@@ -6,7 +6,8 @@ abstract class Nodo {
 	private int id;
 	private List<Nodo> siguientes_nodos = new ArrayList<Nodo> ();
 
-	abstract void interactuar();
+	abstract void interactuar(Jugador jugador);
+	
 	public void agregarNodo(Nodo nodo) {
 		siguientes_nodos.add(nodo);
 	}

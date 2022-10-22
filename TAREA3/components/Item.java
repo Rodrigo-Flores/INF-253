@@ -9,13 +9,13 @@ public class Item {
 	private int aumentar_danio;
 	private int aumentar_defensa;
 
-	public Item (String nombre, int precio, int recuperar_hp, int aumentar_hp_total, int aumentar_danio, int aumentar_defensa) {
-		this.nombre = nombre;
-		this.precio = precio;
-		this.recuperar_hp = recuperar_hp;
-		this.aumentar_hp_total = aumentar_hp_total;
-		this.aumentar_danio = aumentar_danio;
-		this.aumentar_defensa = aumentar_defensa;
+	public Item () {
+		this.nombre = "ITEM";
+		this.precio = this.numero_aleatorio(0, 100);
+		this.recuperar_hp = this.numero_aleatorio(0, 20);
+		this.aumentar_hp_total = this.numero_aleatorio(0, 10);
+		this.aumentar_danio = this.numero_aleatorio(0, 5);
+		this.aumentar_defensa = this.numero_aleatorio(0, 5);
 	}
 
 	public void aplicar(Jugador jugador) {
@@ -27,6 +27,10 @@ public class Item {
 		if (jugador.get_hp_actual() > jugador.get_hp_total()) {
 			jugador.set_hp_actual(jugador.get_hp_total());
 		}
+	}
+
+	public int numero_aleatorio(int min, int max) {
+    	return (int) ((Math.random() * (max - min)) + min);
 	}
 
 	public String get_nombre() { return this.nombre; }

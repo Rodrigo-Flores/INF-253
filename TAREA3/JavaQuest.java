@@ -3,14 +3,14 @@ import java.util.*;
 
 public class JavaQuest {
     public static void main(String[] args) {
-        Scanner sc= new Scanner(System.in);
+        Scanner input= new Scanner(System.in);
 
         System.out.print("Profundidad del mapa (mayor estricto a 2)\n> ");  
-        int profundidad = sc.nextInt();
+        int profundidad = input.nextInt();
         Mapa mapa = new Mapa(profundidad);
 
         System.out.print("¿Cual es tu nombre?\n> ");
-        String nombre = sc.next();
+        String nombre = input.next();
         Jugador jugador = new Jugador(nombre);
 
         int eleccion;
@@ -18,10 +18,10 @@ public class JavaQuest {
         while (flag) {
             System.out.println("\nIngrese una opcion:");
             System.out.print("(1) Avanzar\n(2) Ver mapa\n(3) Ver estadisticas\n(4) Ver items\n(5) Salir\n\n");
-            eleccion = sc.nextInt();
+            eleccion = input.nextInt();
             switch (eleccion) {
                 case 1:
-                    mapa.avanzar();
+                    mapa.avanzar(jugador);
                     break;
                 case 2:
                     mapa.verMapa();
@@ -39,5 +39,6 @@ public class JavaQuest {
                     System.out.println("¡Ups! Parece no se puede hacer eso. ¿Y si pruebas de nuevo?");
             }
         }
+        input.close();
     }
 }
