@@ -44,13 +44,13 @@ public class Mapa {
     	int camino = input.nextInt();
 		if (camino != this.nodo_jefe) {
 	    	double n = Math.random();
-	    	if (n < 0.5) {
+	    	if (n <= 0.3) {
 	    		nodo_actual = new NodoEvento("EVENTO");
 	    		System.out.println("ASIGNADO: EVENTO");
-	    	} else if (n < 0.9) {
+	    	} else if (n <= 0.4) {
 	    		nodo_actual = new NodoTienda("TIENDA");
 	    		System.out.println("ASIGNADO: TIENDA");
-	    	} else if (n < 1.0) {
+	    	} else if (n <= 1.0) {
 	    		nodo_actual = new NodoCombate("ENEMIGO");
 	    		System.out.println("ASIGNADO: ENEMIGO");
 	    	}
