@@ -3,7 +3,7 @@ import java.util.*;
 
 public class JavaQuest {
     public static void main(String[] args) {
-        Scanner input= new Scanner(System.in);
+        Scanner input = new Scanner(System.in);
 
         System.out.print("Profundidad del mapa (mayor estricto a 2)\n> ");  
         int profundidad = input.nextInt();
@@ -30,7 +30,7 @@ public class JavaQuest {
                     jugador.verEstado();
                     break;
                 case 4:
-                    jugador.verItems();
+                    jugador.verItems(jugador);
                     break;
                 case 5:
                     flag = false;
