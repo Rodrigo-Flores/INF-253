@@ -2,7 +2,6 @@ package components;
 import components.Jugador;
 
 public class Item {
-	private String nombre;
 	private int precio;
 	private int recuperar_hp;
 	private int aumentar_hp_total;
@@ -10,7 +9,6 @@ public class Item {
 	private int aumentar_defensa;
 
 	public Item () {
-		this.nombre = "ITEM";
 		this.precio = this.numero_aleatorio(0, 100);
 		this.recuperar_hp = this.numero_aleatorio(0, 20);
 		this.aumentar_hp_total = this.numero_aleatorio(0, 10);
@@ -33,7 +31,6 @@ public class Item {
     	return (int) ((Math.random() * (max - min)) + min);
 	}
 
-	public String get_nombre() { return this.nombre; }
 	public int get_precio() { return this.precio; }
 	public int get_recuperar_hp() { return this.recuperar_hp; }
 	public int get_aumentar_hp_total() { return this.aumentar_hp_total; }
