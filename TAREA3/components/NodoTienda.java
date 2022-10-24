@@ -56,9 +56,15 @@ public class NodoTienda extends Nodo {
 				jugador.asignarItem(this.items.get(n));
 				jugador.set_dinero(jugador.get_dinero() - this.items.get(n).get_precio());
 				System.out.println("Item agregado al inventario.");
-				eleccion = 1;
 			} else {
 				System.out.println("No tienes el dinero suficiente para comprar el item.");
+			}
+			System.out.print("¿Te gustaria comprar algo mas?\n(y/N) > ");
+			Scanner input = new Scanner(System.in);
+			String comprar;
+			comprar = input.next();
+			if ((comprar.equals("n")) || (comprar.equals("N"))) {
+				eleccion = 1;
 			}
 		}
 	}
