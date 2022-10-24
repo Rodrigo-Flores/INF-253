@@ -26,18 +26,10 @@ public class NodoCombate extends Nodo {
 		if (n <= 1.0) {
 			System.out.printf("\nEs el turno de %s\n", jugador.get_nombre());
 			while (p) {
-		        /*System.out.printf("\nHP Actual: %d\nHP Total: %d\nDanio: %d\nDefensa: %d",
-		        	enemigo.get_hp_actual(),
-		        	enemigo.get_hp_total(),
-		        	enemigo.get_danio(),
-		        	enemigo.get_defensa()
-	        	);*/
 				this.enter_continuar();
 				if ((jugador.get_danio() - enemigo.get_defensa()) > 0) {
 					enemigo.set_hp_actual((enemigo.get_hp_actual() - (jugador.get_danio() - enemigo.get_defensa())));
 					System.out.printf("> realizas %d de danio\n", Math.abs(enemigo.get_defensa() - jugador.get_danio()));
-				} else {
-					enemigo.set_hp_actual(0);
 				}
 				System.out.printf("> vida restante del oponente: %d", enemigo.get_hp_actual());
 				this.enter_continuar();
@@ -48,16 +40,15 @@ public class NodoCombate extends Nodo {
 
 				if (enemigo.get_hp_actual() <= 0) {
 					System.out.println("\nHas ganado");
+					this.enter_continuar();
 					break;
 				}
 
-				System.out.println("Es el turno del oponente");
+				System.out.println("\nEs el turno del oponente");
 				this.enter_continuar();
 				System.out.printf("> te realizan %d de danio\n", Math.abs(jugador.get_defensa() - enemigo.get_danio()));
 				if ((enemigo.get_danio() - jugador.get_defensa()) > 0) {
 					jugador.set_hp_actual((jugador.get_hp_actual() - (enemigo.get_danio() - jugador.get_defensa())));
-				} else {
-					jugador.set_hp_actual(0);
 				}
 				System.out.printf("> tu vida restante: %d", jugador.get_hp_actual());
 				this.enter_continuar();
@@ -69,28 +60,21 @@ public class NodoCombate extends Nodo {
 
 				if (enemigo.get_hp_actual() <= 0) {
 					System.out.println("\nHas ganado");
+					this.enter_continuar();
 					break;
 				}
 			}
 		} else {
-			System.out.println("Es el turno de tu oponente");
+			System.out.println("\nEs el turno de tu oponente");
 			while (p) {
-				System.out.printf("\nDinero: %d\nHP Actual: %d\nHP Total: %d\nDanio: %d\nDefensa: %d",
-		        	enemigo.get_dinero(),
-		        	enemigo.get_hp_actual(),
-		        	enemigo.get_hp_total(),
-		        	enemigo.get_danio(),
-		        	enemigo.get_defensa()
-	        	);
 				this.enter_continuar();
-				if (((enemigo.get_defensa() - jugador.get_danio()) > 0)) {
-					jugador.set_hp_actual(jugador.get_hp_actual() - (enemigo.get_defensa() - jugador.get_danio()));
-				} else {
-					jugador.set_hp_actual(0);
+				System.out.printf("> te realizan %d de danio\n", Math.abs(jugador.get_defensa() - enemigo.get_danio()));
+				if ((enemigo.get_danio() - jugador.get_defensa()) > 0) {
+					jugador.set_hp_actual((jugador.get_hp_actual() - (enemigo.get_danio() - jugador.get_defensa())));
 				}
-				System.out.printf("> te realizan %d de danio\n", (jugador.get_defensa() - enemigo.get_danio()));
-				this.enter_continuar();
 				System.out.printf("> tu vida restante: %d", jugador.get_hp_actual());
+				this.enter_continuar();
+
 				if (jugador.get_hp_actual() <= 0) {
 					System.out.println("\nHas perdido");
 					System.exit(0);
@@ -98,22 +82,26 @@ public class NodoCombate extends Nodo {
 
 				if (enemigo.get_hp_actual() <= 0) {
 					System.out.println("\nHas ganado");
+					this.enter_continuar();
 					break;
 				}
 
-				System.out.println("Es tu turno");
+				System.out.println("\nEs tu turno");
 				this.enter_continuar();
-				enemigo.set_hp_actual((enemigo.get_defensa() - jugador.get_danio() > 0) ? (enemigo.get_defensa() - jugador.get_danio()) : 0);
-				System.out.printf("> realizas %d de danio\n", (enemigo.get_defensa() - jugador.get_danio()));
-				this.enter_continuar();
+				if ((jugador.get_danio() - enemigo.get_defensa()) > 0) {
+					enemigo.set_hp_actual((enemigo.get_hp_actual() - (jugador.get_danio() - enemigo.get_defensa())));
+					System.out.printf("> realizas %d de danio\n", Math.abs(enemigo.get_defensa() - jugador.get_danio()));
+				}
 				System.out.printf("> vida restante del oponente: %d", enemigo.get_hp_actual());
+				this.enter_continuar();
 				if (jugador.get_hp_actual() <= 0) {
-					System.out.println("Has perdido");
+					System.out.println("\nHas perdido");
 					System.exit(0);
 				}
 
 				if (enemigo.get_hp_actual() <= 0) {
-					System.out.println("Has ganado");
+					System.out.println("\nHas ganado");
+					this.enter_continuar();
 					break;
 				}
 			}
