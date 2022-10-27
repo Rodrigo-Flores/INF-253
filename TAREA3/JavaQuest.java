@@ -5,7 +5,7 @@ public class JavaQuest {
     public static void main(String[] args) {
         Scanner input = new Scanner(System.in);
 
-        System.out.print("Profundidad del mapa (mayor estricto a 2)\n> ");  
+        System.out.print("Profundidad del mapa\n> ");  
         int profundidad = input.nextInt();
         Mapa mapa = new Mapa(profundidad);
 
