@@ -27,7 +27,7 @@ public class NodoTienda extends Nodo {
 			"Aumentar HP total",
 			"Aumentar danio",
 			"Aumentar defensa");
-		for (int i = 0; i < (int) this.items.size(); i++) {
+		for (int i = 0; i < this.items.size(); i++) {
 			System.out.printf("%-10d | %-10d | %-14d | %-18d | %-18d | %-18d %n",
 				i,
 				this.items.get(i).get_precio(),

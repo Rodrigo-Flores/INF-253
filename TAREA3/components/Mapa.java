@@ -16,7 +16,6 @@ public class Mapa {
 	private int profundidad;
 	private NodoInicial nodo_inicial = new NodoInicial();
 	private Nodo nodo_actual = nodo_inicial;
-	private HashMap<Integer, String> tipos_nodos = new HashMap<Integer, String>();
     private int nodo_jefe;
     private SortedSet<Edge> edges;
 
