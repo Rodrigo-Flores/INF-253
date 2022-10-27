@@ -4,7 +4,7 @@
 CC = javac
 
 # Compiler flags
-CFLAGS = -g
+CFLAGS = -g -Xlint
 
 # Source files
 SRC = $(wildcard *.java)
