@@ -8,7 +8,7 @@ public class NodoJefeFinal extends Nodo {
 
 	public NodoJefeFinal(String nombre) {
 		this.jefe = new Personaje(nombre);
-		this.jefe.set_hp_total(this.numero_aleatorio(50, 151));
+		this.jefe.set_hp_total(this.numero_aleatorio(50, 100));
 		this.jefe.set_hp_actual(this.jefe.get_hp_total());
 		this.jefe.set_danio(this.numero_aleatorio(20, 31));
 		this.jefe.set_defensa(this.numero_aleatorio(15, 21));
