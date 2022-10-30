@@ -26,8 +26,13 @@ public class Mapa {
     }
 
     public void verMapa(){
+    	System.out.printf("Actualmente estas en el nodo %d\n", nodo_actual.get_id());
     	for (Edge edge : edges) {
-    		System.out.printf("(%d) -> (%d)\n", edge.x, edge.y);
+    		if (edge.x == nodo_actual.get_id()) {
+    			System.out.printf("[ estas aqui ] (%d) -> (%d)\n", edge.x, edge.y);
+    		} else {
+	    		System.out.printf("               (%d) -> (%d)\n", edge.x, edge.y);    			
+    		}
     	}
     }
 
