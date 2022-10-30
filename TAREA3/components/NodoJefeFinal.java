@@ -15,7 +15,7 @@ public class NodoJefeFinal extends Nodo {
 	}
 
 	public final void interactuar(Jugador jugador) {
-		System.out.printf("\n¡Has encontrado al this.jefe %s", this.jefe.get_nombre());
+		System.out.printf("\n¡Has encontrado al jefe final, %s", this.jefe.get_nombre());
 		System.out.printf("Vida del oponente: %d", this.jefe.get_hp_actual());
 
 		double n;
