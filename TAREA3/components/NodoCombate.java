@@ -31,7 +31,7 @@ public class NodoCombate extends Nodo {
 					enemigo.set_hp_actual((enemigo.get_hp_actual() - (jugador.get_danio() - enemigo.get_defensa())));
 					System.out.printf("> realizas %d de danio\n", Math.abs(enemigo.get_defensa() - jugador.get_danio()));
 				}
-				System.out.printf("> vida restante del oponente: %d", enemigo.get_hp_actual());
+				System.out.printf("> vida restante del oponente: %d", Math.abs(enemigo.get_hp_actual()));
 				this.enter_continuar();
 				if (jugador.get_hp_actual() <= 0) {
 					System.out.println("\nHas perdido");
@@ -50,7 +50,7 @@ public class NodoCombate extends Nodo {
 				if ((enemigo.get_danio() - jugador.get_defensa()) > 0) {
 					jugador.set_hp_actual((jugador.get_hp_actual() - (enemigo.get_danio() - jugador.get_defensa())));
 				}
-				System.out.printf("> tu vida restante: %d", jugador.get_hp_actual());
+				System.out.printf("> tu vida restante: %d", Math.abs(jugador.get_hp_actual()));
 				this.enter_continuar();
 
 				if (jugador.get_hp_actual() <= 0) {
@@ -72,7 +72,7 @@ public class NodoCombate extends Nodo {
 				if ((enemigo.get_danio() - jugador.get_defensa()) > 0) {
 					jugador.set_hp_actual((jugador.get_hp_actual() - (enemigo.get_danio() - jugador.get_defensa())));
 				}
-				System.out.printf("> tu vida restante: %d", jugador.get_hp_actual());
+				System.out.printf("> tu vida restante: %d", Math.abs(jugador.get_hp_actual()));
 				this.enter_continuar();
 
 				if (jugador.get_hp_actual() <= 0) {
@@ -92,7 +92,7 @@ public class NodoCombate extends Nodo {
 					enemigo.set_hp_actual((enemigo.get_hp_actual() - (jugador.get_danio() - enemigo.get_defensa())));
 					System.out.printf("> realizas %d de danio\n", Math.abs(enemigo.get_defensa() - jugador.get_danio()));
 				}
-				System.out.printf("> vida restante del oponente: %d", enemigo.get_hp_actual());
+				System.out.printf("> vida restante del oponente: %d", Math.abs(enemigo.get_hp_actual()));
 				this.enter_continuar();
 				if (jugador.get_hp_actual() <= 0) {
 					System.out.println("\nHas perdido");
