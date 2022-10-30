@@ -49,7 +49,7 @@ public class Mapa {
 		if (camino != this.nodo_jefe) {
 	    	double n = Math.random();
 	    	if (n <= 0.3) {
-	    		nodo_actual = new NodoEvento("EVENTO");
+	    		nodo_actual = new NodoEvento("ELIGE UNA DE LAS DOS OPCIONES");
 	    	} else if (n <= 0.4) {
 	    		nodo_actual = new NodoTienda("TIENDA");
 	    	} else if (n <= 1.0) {
