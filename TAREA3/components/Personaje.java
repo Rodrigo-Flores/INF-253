@@ -28,12 +28,15 @@ public class Personaje {
 		Boolean p = true;
 		n = Math.random();
 		if (n <= 1.0) {
-			System.out.printf("\nEs el turno de %s\n", this.defensa);
+			System.out.printf("\nEs el turno de %s\n", this.nombre);
 			while (p) {
 				this.enter_continuar();
 				if ((this.danio - personaje.get_defensa()) > 0) {
 					personaje.set_hp_actual((personaje.get_hp_actual() - (this.danio - personaje.get_defensa())));
 					System.out.printf("> realizas %d de danio\n", Math.abs(personaje.get_defensa() - this.danio));
+				}
+				if (personaje.get_hp_actual() < 0) {
+					personaje.set_hp_actual(0);
 				}
 				System.out.printf("> vida restante del oponente: %d", Math.abs(personaje.get_hp_actual()));
 				this.enter_continuar();
@@ -53,6 +56,9 @@ public class Personaje {
 				System.out.printf("> te realizan %d de danio\n", Math.abs(this.defensa - personaje.get_danio()));
 				if ((personaje.get_danio() - this.defensa) > 0) {
 					this.hp_actual = (this.hp_actual - (personaje.get_danio() - this.defensa));
+				}
+				if (this.hp_actual < 0) {
+					this.hp_actual = 0;
 				}
 				System.out.printf("> tu vida restante: %d", Math.abs(this.hp_actual));
 				this.enter_continuar();
@@ -76,6 +82,9 @@ public class Personaje {
 				if ((personaje.get_danio() - this.defensa) > 0) {
 					this.hp_actual = (this.hp_actual - (personaje.get_danio() - this.defensa));
 				}
+				if (this.hp_actual < 0) {
+					this.hp_actual = 0;
+				}
 				System.out.printf("> tu vida restante: %d", Math.abs(this.hp_actual));
 				this.enter_continuar();
 
@@ -95,6 +104,9 @@ public class Personaje {
 				if ((this.danio - personaje.get_defensa()) > 0) {
 					personaje.set_hp_actual((personaje.get_hp_actual() - (this.danio - personaje.get_defensa())));
 					System.out.printf("> realizas %d de danio\n", Math.abs(personaje.get_defensa() - this.danio));
+				}
+				if (personaje.get_hp_actual() < 0) {
+					personaje.set_hp_actual(0);
 				}
 				System.out.printf("> vida restante del oponente: %d", Math.abs(personaje.get_hp_actual()));
 				this.enter_continuar();
