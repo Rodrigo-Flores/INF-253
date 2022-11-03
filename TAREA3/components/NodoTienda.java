@@ -18,6 +18,13 @@ public class NodoTienda extends Nodo {
 		}
 	}
 
+	/*
+	* Interactúa con el jugador, mostrando los items disponibles en la tienda y dando la opción de comprar en la misma
+	*
+	* @param jugador : jugador con el que interactúa la tienda
+	*
+	* @return void
+	*/
 	public final void interactuar(Jugador jugador) {
 		System.out.println("Items disponibles para comprar:");
 		System.out.printf("%-10s | %-10s | %-14s | %-18s | %-18s | %-18s %n",
@@ -49,6 +56,13 @@ public class NodoTienda extends Nodo {
 		}
 	}
 
+	/*
+	* Permite comprar a un jugador un item específico de la tienda y almacenarlo en su inventario
+	*
+	* @param jugador : jugador que comprará un item
+	*
+	* @return void
+	*/
 	public void comprar(int n, Jugador jugador) {
 		this.eleccion = 0;
 		while (eleccion == 0) {

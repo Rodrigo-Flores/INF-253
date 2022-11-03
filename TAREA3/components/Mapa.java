@@ -19,12 +19,20 @@ public class Mapa {
     private int nodo_jefe;
     private SortedSet<Edge> edges;
 
+    /*
+    * Constructor de la clase Mapa
+    */
     public Mapa(int profundidad) {
         this.profundidad = profundidad;
         this.edges = GraphGenerator.Generar(profundidad);
         this.nodo_jefe = edges.last().y;
     }
 
+    /*
+    * Permite vizualizar el mapa como un conjunto de nodos
+    *
+    * @return c : void
+    */
     public void verMapa(){
     	System.out.printf("Actualmente estas en el nodo %d\n", nodo_actual.get_id());
     	for (Edge edge : edges) {
@@ -36,6 +44,13 @@ public class Mapa {
     	}
     }
 
+    /*
+    * Da la opción el jugador de avanzar en los próximos nodos diponibles
+    *
+    * @param jugador : el jugador que interactuará con el nodo presente
+    *
+    * @return c : void
+    */
 	public void avanzar(Jugador jugador) {
 		Scanner input = new Scanner(System.in);  // Create a Scanner object
 		System.out.println("\nCaminos diposnibles para avanzar:\n");
@@ -61,6 +76,5 @@ public class Mapa {
 			nodo_actual.set_id(this.nodo_jefe);
 		}
 		nodo_actual.interactuar(jugador);
-		// input.close();
 	}
 }

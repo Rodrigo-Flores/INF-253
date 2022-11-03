@@ -8,10 +8,18 @@ import java.util.Scanner;
 public class Jugador extends Personaje {
 	private List<Item> items = new ArrayList<Item> ();
 
+	/*
+    * Constructor de la clase Jugador
+    */
 	public Jugador(String nombre) {
 		super(nombre);
 	}
 
+	/*
+    * Permite ver los atributos actuales de un jugador
+    *
+    * @return void
+    */
 	public void verEstado() {
 		System.out.println(
             "Nombre: " + get_nombre()
@@ -23,6 +31,13 @@ public class Jugador extends Personaje {
         );
 	}
 
+	/*
+    * Lista los items almacenados en el inventario del jugador
+    *
+    * @param jugador : Jugador mismo que se usará para ofrecer la opción de aplicar el item
+    *
+    * @return void
+    */
 	public void verItems(Jugador jugador) {
 		System.out.printf("%-10s | %-10s | %-14s | %-18s | %-18s | %-18s %n",
 			"Indice",
@@ -59,6 +74,13 @@ public class Jugador extends Personaje {
 		}
 	}
 
+	/*
+    * Incluye un item en el inventario del jugador
+    *
+    * @param item : item para guardar en el inventario 
+    *
+    * @return void 
+    */
 	public void asignarItem(Item item) {
 		items.add(item);
 	}

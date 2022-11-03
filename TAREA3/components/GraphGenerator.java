@@ -5,6 +5,15 @@ import java.util.SortedSet;
 import java.util.TreeSet;
 
 public class GraphGenerator {
+    /*
+    * Genra aristas con sus nodos respectivos
+    *
+    * @param N : profundidad del grafo
+    *
+    * @param seed : semilla para generar los mismo números aleatorios
+    *
+    * @return SortedSet<Edge> : un set ordenado de aristas y nodos
+    */
     public static SortedSet<Edge> Generar(Integer N, Integer seed) {
         Random rand = new Random(seed);
 
@@ -39,6 +48,13 @@ public class GraphGenerator {
         return edges;
     }
 
+    /*
+    * Función que llama a la misma función con una semilla de generación
+    *
+    * @param N : la profundidad del grafo
+    *
+    * @return SortedSet<Edge> : un set ordenado de aristas y nodos
+    */
     public static SortedSet<Edge> Generar(Integer N) {
         return GraphGenerator.Generar(N, 42);
     }

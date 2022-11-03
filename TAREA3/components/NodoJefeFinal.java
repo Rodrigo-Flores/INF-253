@@ -8,14 +8,14 @@ public class NodoJefeFinal extends Nodo {
 
 	public NodoJefeFinal(String nombre) {
 		this.jefe = new Personaje(nombre);
-		this.jefe.set_hp_total(this.numero_aleatorio(50, 100));
+		this.jefe.set_hp_total(this.numero_aleatorio(60, 91));
 		this.jefe.set_hp_actual(this.jefe.get_hp_total());
-		this.jefe.set_danio(this.numero_aleatorio(20, 31));
-		this.jefe.set_defensa(this.numero_aleatorio(15, 21));
+		this.jefe.set_danio(this.numero_aleatorio(10, 21));
+		this.jefe.set_defensa(this.numero_aleatorio(10, 21));
 	}
 
 	public final void interactuar(Jugador jugador) {
-		System.out.printf("\n¡Has encontrado al jefe final, %s", this.jefe.get_nombre());
+		System.out.printf("\n¡Has encontrado al jefe final, %s\n", this.jefe.get_nombre());
 		System.out.printf("Vida del oponente: %d", this.jefe.get_hp_actual());
 
 		double n;
@@ -113,12 +113,25 @@ public class NodoJefeFinal extends Nodo {
 		}
 	}
 
+	/*
+	* Pide al usuario una entrada de texto. Solicita presionar enter para continuar
+	*
+	* @return void
+	*/
 	public void enter_continuar(){
 	   // System.out.println("\nPresiona \"ENTER\" para continuar...");
 	   Scanner scanner = new Scanner(System.in);
 	   scanner.nextLine();
 	}
 
+	/*
+	* Genera un número aleatorio entre un rando, sin incluir el final del rango. Del tipo [min, max[
+	* 
+	* @para min : número mínimo del rango
+	* @para max : número máximo del rango
+	*
+	* @return int : Número aleatorio
+	*/
 	public int numero_aleatorio(int min, int max) {
     	return (int) ((Math.random() * (max - min)) + min);
 	}

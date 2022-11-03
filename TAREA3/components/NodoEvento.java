@@ -37,6 +37,9 @@ public class NodoEvento extends Nodo {
 		"Lo que es realmente importante... No es que puedas ganar en peleas. Es no perder en contra de ti mismo."
 		);
 
+	/*
+	* Constructor de la clae NodoEvento
+	*/
 	public NodoEvento(String descripcion) {
 		this.descripcion = descripcion;
 		this.alternativa1 = descripciones.get(this.numero_aleatorio(0, descripciones.size()));
@@ -46,6 +49,13 @@ public class NodoEvento extends Nodo {
 		}
 	}
 
+	/*
+	* permite interactuar con un jugador y dándole eventos a elegir
+	*
+	* @param jugador : es el jugador con el que el nodo interactuará
+	*
+	* @return void
+	*/
 	public final void interactuar(Jugador jugador) {
 		int eleccion;
 		System.out.println(this.descripcion);
@@ -62,6 +72,14 @@ public class NodoEvento extends Nodo {
 		// input.close();
 	}
 
+	/*
+	* Genera un número aleatorio entre un rando, sin incluir el final del rango. Del tipo [min, max[
+	* 
+	* @para min : número mínimo del rango
+	* @para max : número máximo del rango
+	*
+	* @return int : Número aleatorio
+	*/
 	public int numero_aleatorio(int min, int max) {
     	return (int) ((Math.random() * (max - min)) + min);
 	}
