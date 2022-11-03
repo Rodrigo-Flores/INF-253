@@ -8,7 +8,7 @@ public class NodoJefeFinal extends Nodo {
 
 	public NodoJefeFinal(String nombre) {
 		this.jefe = new Personaje(nombre);
-		this.jefe.set_hp_total(this.numero_aleatorio(60, 91));
+		this.jefe.set_hp_total(this.numero_aleatorio(60, 71));
 		this.jefe.set_hp_actual(this.jefe.get_hp_total());
 		this.jefe.set_danio(this.numero_aleatorio(10, 21));
 		this.jefe.set_defensa(this.numero_aleatorio(10, 21));
@@ -29,6 +29,9 @@ public class NodoJefeFinal extends Nodo {
 					this.jefe.set_hp_actual((this.jefe.get_hp_actual() - (jugador.get_danio() - this.jefe.get_defensa())));
 					System.out.printf("> realizas %d de danio\n", Math.abs(this.jefe.get_defensa() - jugador.get_danio()));
 				}
+				if (this.jefe.get_hp_actual() < 0) {
+					this.jefe.set_hp_actual(0);
+				}
 				System.out.printf("> vida restante de %s: %d", this.jefe.get_nombre(), this.jefe.get_hp_actual());
 				this.enter_continuar();
 				if (jugador.get_hp_actual() <= 0) {
@@ -48,7 +51,8 @@ public class NodoJefeFinal extends Nodo {
 				System.out.printf("> te realizan %d de danio\n", Math.abs(jugador.get_defensa() - this.jefe.get_danio()));
 				if ((this.jefe.get_danio() - jugador.get_defensa()) > 0) {
 					jugador.set_hp_actual((jugador.get_hp_actual() - (this.jefe.get_danio() - jugador.get_defensa())));
-				} else {
+				}
+				if (jugador.get_hp_actual() < 0) {
 					jugador.set_hp_actual(0);
 				}
 				System.out.printf("> tu vida restante: %d", jugador.get_hp_actual());
@@ -74,6 +78,9 @@ public class NodoJefeFinal extends Nodo {
 				if ((this.jefe.get_danio() - jugador.get_defensa()) > 0) {
 					jugador.set_hp_actual((jugador.get_hp_actual() - (this.jefe.get_danio() - jugador.get_defensa())));
 				}
+				if (jugador.get_hp_actual() < 0) {
+					jugador.set_hp_actual(0);
+				}
 				System.out.printf("> tu vida restante: %d", jugador.get_hp_actual());
 				this.enter_continuar();
 
@@ -95,7 +102,9 @@ public class NodoJefeFinal extends Nodo {
 					this.jefe.set_hp_actual((this.jefe.get_hp_actual() - (jugador.get_danio() - this.jefe.get_defensa())));
 					System.out.printf("> realizas %d de danio\n", Math.abs(this.jefe.get_defensa() - jugador.get_danio()));
 				}
-
+				if (this.jefe.get_hp_actual() < 0) {
+					this.jefe.set_hp_actual(0);
+				}
 				System.out.printf("> vida restante del oponente: %d", this.jefe.get_hp_actual());
 				this.enter_continuar();
 				if (jugador.get_hp_actual() <= 0) {
