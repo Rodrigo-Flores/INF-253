@@ -1,7 +1,24 @@
 #lang racket
 
-(define (func x)
-  (lambda (number) (+ number 3)) x)
+(define (func x rango)
+  (if (= 1 (length rango)) (if (= (first rango) x) (x) '()) (append '() (func x (rest rango)))))
+
+(define delete
+  (lambda (item list)
+    (cond
+     ((equal? item (car list)) (cdr list))
+     (else (cons (car list) (delete item (cdr list)))))))
+
+(define subset
+    (lambda (lst)
+        (if (null? lst)
+            lst
+            (append (subset (cdr lst)))
+        )))
+
+(define (inverso lista n)
+  (map (lambda (x) (delete x (range n))) lista))
+  ;(if (= 1 (length lista)) (delete (first lista) (range n)) (inverso rest lista)))
 
 ;(define (inverso lista n)
 ;  (cond (= 1 (length lista)
