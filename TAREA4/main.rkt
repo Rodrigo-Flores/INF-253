@@ -52,7 +52,7 @@
 
 (define (modsel_simple_helper lista seleccion f i)
   (if (equal? i 0) (car lista)
-      (if (equal? i 4) (car lista) (modsel_simple_helper (cdr lista) seleccion f (- i 1)))))
+      (if (equal? i 4) (car lista) (cons '() (modsel_simple_helper (cdr lista) seleccion f (- i 1))))))
 
 (define (modsel_simple lista seleccion f)
   ;(map f (map (lambda (x) (get-element lista x)) seleccion))
