@@ -1,4 +1,4 @@
-#lang racket
+#lang scheme
 ; ---------------------- INICIO INVERSO ---------------------- ;
 (define delete
   (lambda (item list)
@@ -13,6 +13,8 @@
 (define (inverso lista n)
   (inverso_helper lista (range n)))
 
+; (inverso '(1 3 7) 10)
+
 ; ---------------------- INICIO UMBRAL ---------------------- ;
 
 ; ---------------------- simple ---------------------- ;
@@ -21,15 +23,23 @@
     (- (length lista) (length (memv elemento lista)))))
 
 (define (umbral_simple_helper lista umbral)
-  (cond ((equal? 1 (length umbral)) (index (car umbral) lista)) (else (cons (list (index (car umbral) lista)) (umbral_simple_helper lista (cdr umbral)))))
-  ;(map (lambda (x) (index x lista)) umbral) ; de esta forma tambien funciona, pero la recusion no es muy visible
-  )
+  (cond ((equal? 1 (length umbral)) (index (car umbral) lista)) (else (cons (list (index (car umbral) lista)) (umbral_simple_helper lista (cdr umbral))))))
 
 (define (umbral_simple lista umbral tipo)
   (cond ((equal? tipo #\M) (flatten (umbral_simple_helper lista (filter (lambda (x) (> x umbral)) lista))))
         ((equal? tipo #\m) (flatten (umbral_simple_helper lista (filter (lambda (x) (< x umbral)) lista))))))
 
+; (umbral_simple '(15 2 1 3 27 5 10) 5 #\M)
 ; ---------------------- cola ---------------------- ;
+
+(define (umbral_cola_helper lista umbral)
+  (map (lambda (x) (index x lista)) umbral))
+
+(define (umbral_cola lista umbral tipo)
+  (cond ((equal? tipo #\M) (flatten (umbral_cola_helper lista (filter (lambda (x) (> x umbral)) lista))))
+        ((equal? tipo #\m) (flatten (umbral_cola_helper lista (filter (lambda (x) (< x umbral)) lista))))))
+
+; (umbral_cola '(15 2 1 3 27 5 10) 5 #\m)
 
 ; ---------------------- INICIO MODIFICAR SELECCIONADOS ---------------------- ;
 
