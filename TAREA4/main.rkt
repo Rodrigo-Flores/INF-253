@@ -46,7 +46,7 @@
   (cond ((equal? tipo #\M) (flatten (umbral_simple_helper lista (filter (lambda (x) (> x umbral)) lista))))
         ((equal? tipo #\m) (flatten (umbral_simple_helper lista (filter (lambda (x) (< x umbral)) lista))))))
 
-; (umbral_simple '(15 2 1 3 27 5 10) 5 #\M)
+;(umbral_simple '(15 2 1 3 27 5 10) 5 #\M)
 ; ---------------------- cola ---------------------- ;
 
 ;; funcion auxiliar a umbral_cola. retorna las posiciones de elementos para un umbral dado
