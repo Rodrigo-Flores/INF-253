@@ -22,8 +22,6 @@
 (define (inverso lista n)
   (inverso_helper lista (range n)))
 
-; (inverso '(1 3 7) 10)
-
 ; ---------------------- INICIO UMBRAL ---------------------- ;
 
 ; ---------------------- simple ---------------------- ;
@@ -46,7 +44,6 @@
   (cond ((equal? tipo #\M) (flatten (umbral_simple_helper lista (filter (lambda (x) (> x umbral)) lista))))
         ((equal? tipo #\m) (flatten (umbral_simple_helper lista (filter (lambda (x) (< x umbral)) lista))))))
 
-;(umbral_simple '(15 2 1 3 27 5 10) 5 #\M)
 ; ---------------------- cola ---------------------- ;
 
 ;; funcion auxiliar a umbral_cola. retorna las posiciones de elementos para un umbral dado
@@ -59,8 +56,6 @@
 (define (umbral_cola lista umbral tipo)
   (cond ((equal? tipo #\M) (flatten (umbral_cola_helper lista (filter (lambda (x) (> x umbral)) lista))))
         ((equal? tipo #\m) (flatten (umbral_cola_helper lista (filter (lambda (x) (< x umbral)) lista))))))
-
-; (umbral_cola '(15 2 1 3 27 5 10) 5 #\m)
 
 ; ---------------------- INICIO MODIFICAR SELECCIONADOS ---------------------- ;
 
@@ -83,9 +78,6 @@
 (define (modsel_simple lista seleccion f)
   (modsel_simple_helper lista seleccion f 0 '()))
 
-;(modsel_simple '(15 2 1 3 27 5 10) '(0 4 6) (lambda (x) (modulo x 2)))
-;(modsel_simple '(15 2 1 3 27 5 10) '(3 1 2) (lambda (x) (+ x 5)))
-
 ; ---------------------- cola ---------------------- ;
 
 ;; funcion auxiliar a modsel_cola. modifica los elementos en las posiciones dadas de una lista
@@ -104,16 +96,11 @@
 (define (modsel_cola lista seleccion f)
   (modsel_cola_helper lista seleccion f 0 '()))
 
-;(modsel_cola '(15 2 1 3 27 5 10) '(0 4 6) (lambda (x) (modulo x 2)))
-;(modsel_cola '(15 2 1 3 27 5 10) '(3 1 2) (lambda (x) (+ x 5)))
-
 ; ---------------------- INICIO ESTABLES ---------------------- ;
 (define (estables lista umbral fM fm)
   (append
    (list (length (umbral_simple (modsel_cola lista (umbral_simple lista umbral #\M) fM) umbral #\M)))
    (list (length (umbral_simple (modsel_cola lista (umbral_simple lista umbral #\m) fm) umbral #\m)))))
-
-;(estables '(15 2 1 3 27 5 10) 5 (lambda (x) (/ x 2)) (lambda (x) (* x 2)))
 
 ; ---------------------- INICIO QUERY ---------------------- ;
 
@@ -130,24 +117,3 @@
   (cond ((equal? op 1) (umbral_cola (get-element lista pos) (get-element params 0) (get-element params 1)))
         ((equal? op 2) (modsel_simple (get-element lista pos) (get-element params 0) (eval (get-element params 1))))
         ((equal? op 3) (estables (get-element lista pos) (get-element params 0) (eval (get-element params 1)) (eval (get-element params 2))))))
-
-
-;(query '((0 1 2 3 4) (4 3 2 1 0) (15 2 1 3 27 5 10)) 1 1 '(1 #\M))
-;(0 1 2)
-;(query '((0 1 2 3 4) (4 3 2 1 0) (15 2 1 3 27 5 10)) 0 2 '((0 4) (lambda (x) (+ x 100))))
-;(100 1 2 3 104)
-;(query '((0 1 2 3 4) (4 3 2 1 0) (15 2 1 3 27 5 10)) 2 3 '(5 (lambda (x) (/ x 2)) (lambda (x) (* x 2))))
-;(2 1)
-
-
-
-
-
-
-
-
-
-
-
-
-  
