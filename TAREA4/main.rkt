@@ -50,9 +50,7 @@
          (if (list? (memq i seleccion))
              (modsel_simple_helper (cdr lista) seleccion f (+ i 1) (cons aux (f (car lista))))
              (modsel_simple_helper (cdr lista) seleccion f (+ i 1) (cons aux (car lista)))))
-        (else (flatten aux))))
-  ;(if (equal? 1 (length lista)) (flatten aux) '(1)))
-      
+        (else (flatten aux))))   
 
 (define (modsel_simple lista seleccion f)
   (modsel_simple_helper lista seleccion f 0 '()))
