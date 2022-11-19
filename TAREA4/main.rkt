@@ -117,3 +117,14 @@
   (cond ((equal? op 1) (umbral_cola (get-element lista pos) (get-element params 0) (get-element params 1)))
         ((equal? op 2) (modsel_simple (get-element lista pos) (get-element params 0) (eval (get-element params 1))))
         ((equal? op 3) (estables (get-element lista pos) (get-element params 0) (eval (get-element params 1)) (eval (get-element params 2))))))
+
+
+;(inverso '(1 3 7) 10)
+;(umbral_simple '(15 2 1 3 27 5 10) 5 #\M)
+;(umbral_cola '(15 2 1 3 27 5 10) 5 #\m)
+;(modsel_cola '(15 2 1 3 27 5 10) '(0 4 6) (lambda (x) (modulo x 2)))
+;(modsel_cola '(15 2 1 3 27 5 10) '(3 1 2) (lambda (x) (+ x 5)))
+;(estables '(15 2 1 3 27 5 10) 5 (lambda (x) (/ x 2)) (lambda (x) (* x 2)))
+;(query '((0 1 2 3 4) (4 3 2 1 0) (15 2 1 3 27 5 10)) 1 1 '(1 #\M))
+;(query '((0 1 2 3 4) (4 3 2 1 0) (15 2 1 3 27 5 10)) 0 2 '((0 4) (lambda (x) (+ x 100))))
+;(query '((0 1 2 3 4) (4 3 2 1 0) (15 2 1 3 27 5 10)) 2 3 '(5 (lambda (x) (/ x 2)) (lambda (x) (* x 2))))
